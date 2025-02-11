@@ -26,6 +26,9 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerList = findViewById<RecyclerList<Data>>(R.id.recyclerList)
         recyclerList.apply {
+            setHasStableIds(true)
+            reverseLayout(false)
+            stackFromEnd(false)
             setItems(dataList.toList(), R.layout.cell_layout) { view, item, index ->
                 view.findViewById<TextView>(R.id.title).text = item.title
                 view.findViewById<TextView>(R.id.content).text = item.content
