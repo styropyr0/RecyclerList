@@ -24,6 +24,13 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 ```
+or for `settings.gradle.kts`
+
+```kotlin
+repositories { 
+    maven { url = uri("https://jitpack.io") }
+}
+```
 
 ### Step 2: Add Dependency
 
@@ -31,7 +38,14 @@ Add the following dependency to your module-level `build.gradle`:
 
 ```gradle
 dependencies {
-    implementation 'com.github.styropyr0:RecyclerList:1.0.0'
+    implementation 'com.github.styropyr0:RecyclerList:v1.0.0'
+}
+```
+or for `app:build.gradle.kts`
+
+```kotlin
+dependencies {
+    implementation("com.github.styropyr0:RecyclerList:v1.0.0")
 }
 ```
 
@@ -67,6 +81,15 @@ recyclerList.apply {
             removeItem(index)
         }
     }
+}
+
+// This will change the 6th element's title and content after 3s
+GlobalScope.launch {
+  delay(3000)
+  withContext(Dispatchers.Main) {
+    recyclerList.items[5] = Data("Title CHANGED", "This is the content of CHANGED")
+    recyclerList.notifyItemChanged(5)
+  }
 }
 ```
 

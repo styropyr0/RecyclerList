@@ -21,7 +21,7 @@ import com.matrix.recycler_list.interfaces.ViewRecycled
 internal class RecyclerListAdapter<T>(internal var layoutResId: Int) :
     RecyclerView.Adapter<RecyclerListAdapter<T>.ViewHolder>() {
 
-    private var items: MutableList<T> = mutableListOf()
+    var items: MutableList<T> = mutableListOf()
 
     private var binder1: ((View, T, Int) -> Unit) = { _, _, _ -> }
     private var binder2: ((View, T) -> Unit) = { _, _ -> }

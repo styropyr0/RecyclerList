@@ -33,6 +33,7 @@ class RecyclerList<T> @JvmOverloads constructor(
 ) : RecyclerView(context, attrs) {
 
     private val layoutResId: Int = 0
+    var items: MutableList<T> = mutableListOf()
 
     private val adapter = RecyclerListAdapter<T>(layoutResId)
 
@@ -92,6 +93,7 @@ class RecyclerList<T> @JvmOverloads constructor(
      * @param binder The function to bind each item to the view, with item position.
      */
     fun setItems(items: List<T>, newLayoutResId: Int? = null, binder: (View, T, Int) -> Unit) {
+        this.items = items.toMutableList()
         adapter.setData(items, newLayoutResId ?: adapter.layoutResId, binder)
     }
 
@@ -103,7 +105,52 @@ class RecyclerList<T> @JvmOverloads constructor(
      * @param binder The function to bind each item to the view.
      */
     fun setItems(items: List<T>, newLayoutResId: Int? = null, binder: (View, T) -> Unit) {
+        this.items = items.toMutableList()
         adapter.setData(items, newLayoutResId ?: adapter.layoutResId, binder)
+    }
+
+    /**
+     * Notifies the adapter that the data set has changed.
+     */
+    fun notifyDataSetChanged() {
+        adapter.items = items
+        adapter.notifyDataSetChanged()
+    }
+
+    /**
+     * Notifies the adapter that an item has been inserted at a specific position.
+     * @param position The position where the item was inserted.
+     */
+    fun notifyItemInserted(position: Int) {
+        adapter.items = items
+        adapter.notifyItemInserted(position)
+    }
+
+    /**
+     * Notifies the adapter that an item has been removed at a specific position.
+     * @param position The position where the item was removed.
+     */
+    fun notifyItemRemoved(position: Int) {
+        adapter.items = items
+        adapter.notifyItemRemoved(position)
+    }
+
+    /**
+     * Notifies the adapter that an item has been changed at a specific position.
+     * @param position The position where the item was changed.
+     */
+    fun notifyItemChanged(position: Int) {
+        adapter.items = items
+        adapter.notifyItemChanged(position)
+    }
+
+    /**
+     * Notifies the adapter that a range of items have changed at specific positions.
+     * @param positionStart The starting position where the items were changed.
+     */
+    fun notifyItemRangeChanged(positionStart: Int, itemCount: Int) {
+        adapter.items = items
+        adapter.notifyItemRangeChanged(positionStart, itemCount)
     }
 
     /**
